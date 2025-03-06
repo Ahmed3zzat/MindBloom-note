@@ -70,3 +70,21 @@ body {
   background-position: center;
   background-repeat: no-repeat;
 }
+
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0px); }
+}
+
+.floating {
+  animation: float 3s ease-in-out infinite;
+}
+
+@layer utilities {
+  .text-stroke {
+    -webkit-text-stroke: 1px theme('colors.gray.800');
+    text-stroke: 1px theme('colors.gray.800');
+  }
+}

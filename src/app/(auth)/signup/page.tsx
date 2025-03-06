@@ -46,6 +46,7 @@ export default function Signup() {
       dispatch(setSignup(values));
       console.log(values);
       toast.success("Signup Successful!");
+      formik.resetForm();
     },
   });
 

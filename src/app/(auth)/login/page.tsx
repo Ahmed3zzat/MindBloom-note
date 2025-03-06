@@ -35,8 +35,7 @@ export default function Login() {
     onSubmit: (values) => {
       dispatch(setLogin(values))
         .then((response) => {
-          console.log(response);
-          
+          formik.resetForm();
           if (response.payload.msg == "done") {
             setTimeout(() => {
               router.push("/");

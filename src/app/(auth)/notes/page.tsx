@@ -61,8 +61,8 @@ export default function Note() {
     onSubmit: (values) => {
       dispatch(updateNote({ id: isSelected._id, ...values })).then(() => {
         dispatch(getNote());
+        setIsModalOpen1(false);
       });
-      setIsModalOpen(false);
       formik.resetForm();
     },
   });
@@ -72,8 +72,9 @@ export default function Note() {
     router.push("/login");
   }
   useEffect(() => {
-    dispatch(getNote());
-  }, [notes]);
+    if(notes){
+    dispatch(getNote());}
+  },[notes]);
 
   return (
     <>
@@ -98,36 +99,53 @@ export default function Note() {
             </span>
           </div>
 
-          <ul className="space-y-4">
+          <ul className="space-y-5">
             <li>
               <Link
                 href="/"
-                className="flex items-center gap-2 text-[#CBAC88] hover:text-white transition duration-300"
+                className="flex items-center gap-3 p-3 rounded-lg hover:bg-white/10 transition-all duration-300 group"
               >
-                <span>🏠</span>
-                <span>Home</span>
+                <span className="text-2xl group-hover:scale-110 transition-transform">
+                  🏠
+                </span>
+                <span className="text-[#CBAC88] group-hover:text-white">
+                  Home
+                </span>
               </Link>
             </li>
             <li>
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="flex items-center gap-2 text-[#CBAC88] hover:text-white transition duration-300"
+                className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-white/10 transition-all duration-300 group"
               >
-                <span>➕</span>
-                <span>Add Note</span>
+                <span className="text-2xl group-hover:scale-110 transition-transform">
+                  ✨
+                </span>
+                <span className="text-[#CBAC88] group-hover:text-white">
+                  New Note
+                </span>
               </button>
             </li>
             <li>
-              <div className="flex items-center gap-2 text-[#CBAC88] hover:text-white transition duration-300">
-                <span>⏭️</span>
-                <span onClick={logout}>Logout</span>
-              </div>
+              <button
+                onClick={logout}
+                className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-white/10 transition-all duration-300 group"
+              >
+                <span className="text-2xl group-hover:scale-110 transition-transform">
+                  🚪
+                </span>
+                <span className="text-[#CBAC88] group-hover:text-white">
+                  Logout
+                </span>
+              </button>
             </li>
           </ul>
         </div>
 
         <div className="note section h-full bg-[#F8E9E9] p-6 relative rounded-lg shadow-md">
-          <h1 className="text-3xl font-bold text-[#394648] mb-6">My Notes:</h1>
+          <h1 className="text-3xl font-bold text-[#394648] mb-6 hidden sm:block">
+            My Notes:
+          </h1>
           <button
             onClick={() => setIsModalOpen(true)}
             className="cursor-pointer bg-[#69995D] text-white px-5 py-3 rounded-lg hover:bg-[#394648] transition absolute right-5 top-5 shadow-md"
@@ -135,7 +153,7 @@ export default function Note() {
             Add Note
           </button>
 
-          <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8">
+          <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-12">
             {notes ? (
               notes.map((note) => (
                 <motion.div
@@ -148,7 +166,7 @@ export default function Note() {
                   <h2 className="text-xl font-semibold text-green-700 mb-2">
                     {note.title}
                   </h2>
-                  <p className="text-gray-600 mb-4">{note.content}</p>
+                  <p className="mb-4 break-words">{note.content}</p>
                   <p className="text-sm text-gray-500">
                     Created: {new Date(note.createdAt).toLocaleTimeString()}
                   </p>
@@ -157,7 +175,10 @@ export default function Note() {
                       onClick={() => {
                         setIsModalOpen1(true);
                         setisSelected(note);
-                        formik1.setValues({ title: note.title, content: note.content });
+                        formik1.setValues({
+                          title: note.title,
+                          content: note.content,
+                        });
                       }}
                       className="text-blue-500 hover:text-blue-700 cursor-pointer"
                     >
@@ -166,7 +187,6 @@ export default function Note() {
                     <button
                       onClick={() => {
                         dispatch(deleteNote(note._id));
-                        setisSelected(note);
                       }}
                       className="text-red-500 hover:text-red-700 cursor-pointer"
                     >
@@ -258,7 +278,7 @@ export default function Note() {
                   </AnimatePresence>
                 </motion.div>
               ))
-            ) : (
+            ) :  (
               <Loading />
             )}
           </div>
