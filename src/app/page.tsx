@@ -29,7 +29,7 @@ export default function Home() {
 
         <p className="mt-4 text-gray-800 text-sm leading-relaxed">
           MindBloom Notes is your ultimate digital solution for organizing,
-          sharing, and growing your knowledge. Whether you're a student,
+          sharing, and growing your knowledge. Whether you`re a student,
           professional, or creative thinker, our platform empowers you to
           capture ideas, create structured notes, and collaborate seamlessly.
           With features like real-time syncing, customizable templates, and

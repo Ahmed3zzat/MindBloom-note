@@ -48,16 +48,12 @@ const userS = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder.addCase(setSignup.fulfilled, () => {
-      // console.log("✅");
     });
     builder.addCase(setSignup.rejected, () => {
-      // console.log("❌");
     });
     builder.addCase(setSignup.pending, () => {
-      // console.log("🚴‍♀️");
     });
     builder.addCase(setLogin.fulfilled, (prevState, action) => {
-      // console.log("✅");
       prevState.isError = false;
       prevState.isLoading = false;
       prevState.msg = action.payload.msg;
@@ -67,16 +63,13 @@ const userS = createSlice({
       toast.success("Login Success")
     });
     builder.addCase(setLogin.rejected, (prevState) => {
-      // console.log("❌");
       prevState.isError = true;
       prevState.isLoading = false;
       prevState.msg = "check your email or password";
       toast.dismiss(prevState.idToast)
       toast.error("Invalid data")
-      // console.log(action);
     });
     builder.addCase(setLogin.pending, (prevState) => {
-      // console.log("🚴‍♀️");
       prevState.idToast=toast.loading("Loading...")
       prevState.isError = false;
       prevState.isLoading = true;

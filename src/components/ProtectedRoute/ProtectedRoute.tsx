@@ -1,5 +1,4 @@
-"use client"; // استخدم هذا إذا كنت في مجلد app
-
+"use client"; 
 import { useAppSelector } from "@/hooks/store.hook";
 import { useRouter } from "next/navigation";
 import { ReactNode, useEffect } from "react";
